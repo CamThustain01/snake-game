@@ -6,24 +6,24 @@ let squaresx = 0;
 let speed = 1;
 
 
-let previousTimestamp = null;                                         
+let previousTimestamp = null;    // Variable to store the timestamp of the previous frame                                     
 let accumulatedTime = 0;                   
 let tickInterval = 500;
 
 function gameLoop(timestamp) {
     
-    if (!previousTimestamp) {
-        previousTimestamp = timestamp;
+    if (!previousTimestamp) { // If this is the first frame, initialize previousTimestamp because there is no previous frame to compare to
+        previousTimestamp = timestamp; 
     }
 
-    const frameTime = timestamp - previousTimestamp;
+    const frameTime = Math.min(timestamp - previousTimestamp, 100); // Limit frame time to avoid large jumps (browser pauses, tab switching, etc.)
 
     previousTimestamp = timestamp;
     
     accumulatedTime += frameTime;
     
-    if (accumulatedTime >= tickInterval) {
-        accumulatedTime -= tickInterval;
+    if (accumulatedTime >= tickInterval) { 
+        accumulatedTime -= tickInterval; 
 
         squaresx += speed * 50;
 
