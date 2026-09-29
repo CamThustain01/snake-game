@@ -4,12 +4,12 @@ A browser-based Snake game built with vanilla JavaScript and the HTML Canvas API
 
 ## Status
 
-🚧 In progress. Currently on Milestone 1.
+🚧 In progress. Currently on Milestone 2.
 
 ## Milestones
 
 - [ ] **M1:** Canvas on screen, draw a square, `requestAnimationFrame` loop
-- [ ] **M2:** Snake moves on a fixed tick, keyboard controls (no reversing)
+- [x] **M2:** Snake moves on a fixed tick, keyboard controls (no reversing)
 - [ ] **M3:** Food, growth, score, game over, restart
 - [ ] **M4:** Start/pause/game over screens, high score (`localStorage`), speed scaling
 
