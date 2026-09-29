@@ -1,23 +1,41 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+const squareSize = 50;
 let squaresx = 0;
-let squareIncrement = 1;
+let speed = 1;
+
+
+let previousTimestamp = null;                                         
+let accumulatedTime = 0;                   
+let tickInterval = 500;
 
 function gameLoop(timestamp) {
     
-    ctx.clearRect(squaresx, 175, 50, 50);
+    if (!previousTimestamp) {
+        previousTimestamp = timestamp;
+    }
 
-    squaresx += squareIncrement;
+    const frameTime = timestamp - previousTimestamp;
+
+    previousTimestamp = timestamp;
+    
+    accumulatedTime += frameTime;
+    
+    if (accumulatedTime >= tickInterval) {
+        accumulatedTime -= tickInterval;
+
+        squaresx += speed * 50;
+
+        if (squaresx > canvas.width - squareSize || squaresx < 0) {
+            speed = speed * -1;
+        }
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     ctx.fillStyle = "blue";
-    ctx.fillRect(squaresx, 175, 50, 50);
-
-    if (squaresx > canvas.width - 50) {
-        squareIncrement -= 1;
-    }
-    else if (squaresx <0) {
-        squareIncrement += 1;
-    }
+    ctx.fillRect(squaresx, 175, squareSize, squareSize);
 
     requestAnimationFrame(gameLoop);
 }
