@@ -1,10 +1,14 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-const squareSize = 50;
-let squaresx = 0;
+
+//square (snake) variables
+let column = 0;
 let speed = 1;
 
+//cell variables
+const cellSize = 25;
+const columns = canvas.width / cellSize;
 
 let previousTimestamp = null;    // Variable to store the timestamp of the previous frame                                     
 let accumulatedTime = 0;                   
@@ -25,9 +29,16 @@ function gameLoop(timestamp) {
     if (accumulatedTime >= tickInterval) { 
         accumulatedTime -= tickInterval; 
 
-        squaresx += speed * 50;
+        if (column >= columns - 1) {// If the square reaches the right edge, reverse direction
+            speed = -1;
+        }
+        else if (column <= 0) { // If the square reaches the left edge, reverse direction
+            speed = 1;
+        }
+        
+        column += speed; // Move the square by the speed value
 
-        if (squaresx > canvas.width - squareSize || squaresx < 0) {
+        if (column > columns - 1 || column < 0) {
             speed = speed * -1;
         }
     }
@@ -35,7 +46,7 @@ function gameLoop(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "blue";
-    ctx.fillRect(squaresx, 175, squareSize, squareSize);
+    ctx.fillRect(column * cellSize, 175, cellSize, cellSize);
 
     requestAnimationFrame(gameLoop);
 }
