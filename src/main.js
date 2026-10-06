@@ -54,4 +54,25 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
 }
 
+addEventListener("keydown", (e) => {
+    switch(e.key) {
+        case "ArrowUp":
+            directionX = 0;
+            directionY = -1;
+            break;
+        case "ArrowDown":
+            directionX = 0;
+            directionY = 1;
+            break;
+        case "ArrowLeft":
+            directionX = -1;
+            directionY = 0;
+            break;
+        case "ArrowRight":
+            directionX = 1;
+            directionY = 0;
+            break;
+    }
+});
+
 requestAnimationFrame(gameLoop);
