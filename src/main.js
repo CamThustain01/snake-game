@@ -57,18 +57,22 @@ function gameLoop(timestamp) {
 addEventListener("keydown", (e) => {
     switch(e.key) {
         case "ArrowUp":
+            if (directionY === 1) break; // Prevent reversing direction
             directionX = 0;
             directionY = -1;
             break;
         case "ArrowDown":
+            if (directionY === -1) break; // Prevent reversing direction
             directionX = 0;
             directionY = 1;
             break;
         case "ArrowLeft":
+            if (directionX === 1) break; // Prevent reversing direction
             directionX = -1;
             directionY = 0;
             break;
         case "ArrowRight":
+            if (directionX === -1) break; // Prevent reversing direction
             directionX = 1;
             directionY = 0;
             break;
