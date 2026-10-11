@@ -7,6 +7,8 @@ let column = 0;
 let row = 0;
 let directionX = 0;
 let directionY = 1;
+let nextDirectionX = 0;
+let nextDirectionY = 1;
 
 //cell variables
 const cellSize = 25;
@@ -31,6 +33,8 @@ function gameLoop(timestamp) {
     
     if (accumulatedTime >= tickInterval) { 
         accumulatedTime -= tickInterval; 
+        directionX = nextDirectionX; // Update the current direction to the next direction
+        directionY = nextDirectionY; // Update the current direction to the next direction
 
         const nextColumn = column + directionX; // Calculate the next column position based on the current direction
         const nextRow = row + directionY; // Calculate the next row position based on the current direction
@@ -58,23 +62,23 @@ addEventListener("keydown", (e) => {
     switch(e.key) {
         case "ArrowUp":
             if (directionY === 1) break; // Prevent reversing direction
-            directionX = 0;
-            directionY = -1;
+            nextDirectionX = 0;
+            nextDirectionY = -1;
             break;
         case "ArrowDown":
             if (directionY === -1) break; // Prevent reversing direction
-            directionX = 0;
-            directionY = 1;
+            nextDirectionX = 0;
+            nextDirectionY = 1;
             break;
         case "ArrowLeft":
             if (directionX === 1) break; // Prevent reversing direction
-            directionX = -1;
-            directionY = 0;
+            nextDirectionX = -1;
+            nextDirectionY = 0;
             break;
         case "ArrowRight":
             if (directionX === -1) break; // Prevent reversing direction
-            directionX = 1;
-            directionY = 0;
+            nextDirectionX = 1;
+            nextDirectionY = 0;
             break;
     }
 });
